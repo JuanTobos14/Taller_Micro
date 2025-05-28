@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Historias</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Gestor de Historias</h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#section-crear">Crear</a></li>
+                <li><a href="#section-historias">Ver Historias</a></li>
+                <li><a href="#section-informe">Informe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="main-section" id="section-crear">
+            <div class="section-label left">Crear</div>
+            <div class="section-content section-crear-grid">
+                <div class="panel" id="crear-sprint-panel">
+                    <h2>Crear Nuevo Sprint</h2>
+                    <form id="sprintForm">
+                        <input type="hidden" id="sprintId"> <div class="form-group">
+                            <label for="sprintNombre">Nombre:</label>
+                            <input type="text" id="sprintNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sprintFechaInicio">Fecha de Inicio:</label>
+                            <input type="date" id="sprintFechaInicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sprintFechaFin">Fecha de Fin:</label>
+                            <input type="date" id="sprintFechaFin" required>
+                        </div>
+                        <button type="submit" id="saveSprintBtn">Crear Sprint</button> <button type="button" id="cancelEditSprintBtn" style="display: none;">Cancelar Edición</button> </form>
+                </div>
+
+                <div class="panel" id="crear-historia-panel">
+                    <h2>Crear/Editar Historia de Usuario</h2>
+                    <form id="historiaForm">
+                        <input type="hidden" id="historiaId">
+                        <div class="form-group">
+                            <label for="historiaTitulo">Título:</label>
+                            <input type="text" id="historiaTitulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaDescripcion">Descripción:</label>
+                            <textarea id="historiaDescripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaResponsable">Responsable:</label>
+                            <input type="text" id="historiaResponsable" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaEstado">Estado:</label>
+                            <select id="historiaEstado" required>
+                                <option value="nueva">Nueva</option>
+                                <option value="activa">Activa</option>
+                                <option value="finalizada">Finalizada</option>
+                                <option value="impedimento">En Impedimento</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaPuntos">Puntos de Complejidad:</label>
+                            <input type="number" id="historiaPuntos" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaFechaCreacion">Fecha de Creación:</label>
+                            <input type="date" id="historiaFechaCreacion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="historiaSprint">Asignar a Sprint:</label>
+                            <select id="historiaSprint" required>
+                                </select>
+                        </div>
+                        <button type="submit" id="saveHistoriaBtn">Guardar Historia</button>
+                        <button type="button" id="cancelEditBtn" style="display: none;">Cancelar Edición</button>
+                    </form>
+                </div>
+            </div>
+            <div class="section-label right">Crear</div>
+        </section>
+
+        <section class="main-section" id="section-historias">
+            <div class="section-label left">Historias</div>
+            <div class="section-content">
+                <div class="panel" id="historias-por-sprint-panel">
+                    <h2>Historias por Sprint</h2>
+                    <div id="historiasPorSprintContainer">
+                        </div>
+                    <button id="refreshHistoriasBtn">Actualizar Historias</button>
+                </div>
+            </div>
+            <div class="section-label right">Historia</div>
+        </section>
+
+        <section class="main-section" id="section-informe">
+            <div class="section-label left">Informe</div>
+            <div class="section-content">
+                <div class="panel" id="informe-historias-panel">
+                    <h2>Informe de Historias</h2>
+                    <div class="form-group">
+                        <label for="reportResponsable">Filtrar por Responsable (opcional):</label>
+                        <input type="text" id="reportResponsable">
+                        <button id="generateReportBtn">Generar Informe</button>
+                    </div>
+                    <div id="reportOutput">
+                        </div>
+                </div>
+            </div>
+            <div class="section-label right">Informe</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Gestor de Historias</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
