@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_BASE_URL = 'http://127.0.0.1:8000/api'; // Asegúrate de que esta URL sea correcta para tu entorno Laravel
+    const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
     // --- Elementos del DOM ---
     const sprintForm = document.getElementById('sprintForm');
