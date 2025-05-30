@@ -1,50 +1,56 @@
 :root {
-    --color-dark-blue: hsl(238, 30%, 26%); /* Fondo principal, encabezado, botones */
-    --color-light-blue: hsl(194, 69%, 56%); /* Acento, enlaces, estados activos */
-    --color-medium-grey: hsl(210, 15%, 50%); /* Texto, bordes */
+    --color-dark-blue: hsl(238, 30%, 26%); 
+    --color-light-blue: hsl(194, 69%, 56%); 
+    --color-medium-grey: hsl(210, 15%, 50%); 
     --color-white: #ffffff;
-    --color-off-white: #f8f9fa; /* Fondo claro para paneles */
-    --color-light-bg: #e0e6f0; /* Fondo de sección */
-    --color-label-bg: #dbe4ef; /* Fondo de etiqueta de sección */
-    --color-border-light: #cdd4dc; /* Bordes claros */
+    --color-off-white: #f8f9fa; 
+    --color-light-bg: #e0e6f0; 
+    --color-label-bg: #dbe4ef; 
+    --color-border-light: #cdd4dc; 
     --color-error: #dc3545;
     --color-warning: #ffc107;
     --color-info: #17a2b8;
 }
 
-/* Estilos Base */
+
 body {
-    font-family: 'Poppins', sans-serif; /* Nueva fuente */
+    font-family: 'Poppins', sans-serif; 
     margin: 0;
     padding: 0;
-    background-color: var(--color-light-bg); /* Fondo más claro */
-    color: var(--color-medium-grey); /* Color de texto predeterminado */
+    background-color: var(--color-light-bg); 
+    color: var(--color-medium-grey); 
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 100px; 
 }
 
 header {
-    background-color: var(--color-dark-blue); /* Encabezado más oscuro */
+    background-color: var(--color-dark-blue); 
     color: var(--color-white);
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
 }
 
 header h1 {
     color: var(--color-white);
     margin: 0;
-    font-size: 2.8em; /* Título ligeramente más grande */
-    font-weight: 600; /* Poppins semi-bold */
+    font-size: 2.8em; 
+    font-weight: 600; 
 }
 
 h1, h2 {
     color: var(--color-dark-blue);
     text-align: center;
     margin-top: 15px;
-    margin-bottom: 25px; /* Más espacio debajo de los encabezados */
+    margin-bottom: 25px; 
     font-weight: 600;
 }
 
@@ -56,13 +62,11 @@ h2 {
     font-size: 1.8em;
 }
 
-/* Navegación Principal */
 nav.main-nav {
-    background-color: var(--color-dark-blue); /* Igual que el encabezado */
+    background-color: var(--color-dark-blue); 
     color: var(--color-white);
     padding: 10px 0;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 nav.main-nav ul {
@@ -71,64 +75,62 @@ nav.main-nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    gap: 25px; /* Espacio aumentado */
+    gap: 25px; 
 }
 
 nav.main-nav ul li a {
     color: var(--color-white);
     text-decoration: none;
-    padding: 12px 20px; /* Área clickable más grande */
-    border-radius: 8px; /* Ligeramente más redondeado */
+    padding: 12px 20px; 
+    border-radius: 8px; 
     transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 400; /* Poppins regular */
+    font-weight: 400; 
 }
 
 nav.main-nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Hover sutil */
-    transform: translateY(-2px); /* Efecto de elevación ligera */
+    background-color: rgba(255, 255, 255, 0.1); 
+    transform: translateY(-2px); 
 }
 
-/* Contenedor Principal - Diseño de Cuadrícula CSS para la página general */
 main.container {
-    display: flex; /* Cambiado a flex para control de margen fijo */
+    display: flex; 
     flex-direction: column;
-    gap: 25px; /* Espacio consistente entre secciones principales */
-    padding: 25px; /* Relleno dentro del contenedor */
-    max-width: 1200px; /* Ancho máximo fijo para el área de contenido */
-    width: 90%; /* Ancho responsivo hasta el max-width */
-    margin: 25px auto; /* Centrar el contenedor horizontalmente */
+    gap: 25px; 
+    padding: 25px; 
+    max-width: 1200px; 
+    width: 90%; 
+    margin: 25px auto; 
     flex-grow: 1;
-    box-sizing: border-box; /* Incluir relleno en el ancho */
+    box-sizing: border-box; 
 }
 
-/* Estilos para las secciones principales (Crear, Historias, Informe) */
 .main-section {
     display: grid;
-    grid-template-columns: auto 1fr auto; /* Etiqueta izquierda, contenido, etiqueta derecha */
+    grid-template-columns: auto 1fr auto; 
     gap: 20px;
-    background-color: var(--color-light-bg); /* Fondo de sección */
+    background-color: var(--color-light-bg); 
     border: 1px solid var(--color-border-light);
-    border-radius: 12px; /* Esquinas más redondeadas */
+    border-radius: 12px; 
     padding: 20px;
     position: relative;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1); /* Sombra más suave y grande */
-    overflow: hidden; /* Asegurar que las etiquetas no se desborden */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1); 
+    overflow: hidden; 
 }
 
 .section-label {
-    writing-mode: vertical-lr; /* Texto vertical */
-    text-orientation: mixed; /* Orientación del texto */
-    font-size: 1.6em; /* Etiqueta ligeramente más grande */
-    font-weight: 700; /* Poppins bold */
-    color: var(--color-light-blue); /* Color de acento para la etiqueta */
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: 1.6em; 
+    font-weight: 700; 
+    color: var(--color-light-blue); 
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px 5px; /* Relleno ajustado */
-    background-color: var(--color-label-bg); /* Fondo de la etiqueta */
-    border-radius: 8px; /* Esquinas redondeadas para etiquetas */
+    padding: 15px 5px; 
+    background-color: var(--color-label-bg); 
+    border-radius: 8px; 
     text-transform: uppercase;
-    letter-spacing: 1px; /* Espaciado para texto vertical */
+    letter-spacing: 1px; 
 }
 
 .section-label.left {
@@ -146,103 +148,93 @@ main.container {
 .section-content {
     grid-column: 2;
     grid-row: 1;
-    display: grid; /* Cuadrícula dentro del section-content para los paneles */
+    display: grid; 
     gap: 20px;
     width: 100%;
 }
 
-/* Cuadrícula específica para la sección "Crear" */
 .section-crear-grid {
-    grid-template-columns: 1fr 1fr; /* Dos columnas para "Crear Sprint" y "Crear/Editar Historia" */
-    align-items: stretch; /* Estirar los ítems para que llenen la altura de la fila */
+    grid-template-columns: 1fr 1fr; 
+    align-items: stretch; 
 }
 
-/* Estilos generales del panel */
 .panel {
-    background-color: var(--color-white); /* Fondo blanco para paneles */
-    padding: 30px; /* Relleno aumentado */
-    border-radius: 10px; /* Redondeo consistente */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra más ligera */
+    background-color: var(--color-white); 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
     box-sizing: border-box;
-    display: flex; /* Habilitar flex para centrado vertical */
+    display: flex; 
     flex-direction: column;
-    justify-content: center; /* Centrar contenido verticalmente dentro del panel */
+    justify-content: center; 
 }
 
-/* Asegurar que el panel del formulario de sprint ocupe toda la altura de su celda de cuadrícula */
 #crear-sprint-panel {
-    align-self: stretch; /* Hacer que llene la altura de su área de cuadrícula */
+    align-self: stretch; 
 }
 
-
-/* Elementos del formulario */
 form {
-    margin-bottom: 0; /* Eliminar margen predeterminado */
+    margin-bottom: 0; 
 }
 
 .form-group {
-    margin-bottom: 18px; /* Ligeramente más espacio */
+    margin-bottom: 18px; 
 }
 
 label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600; /* Poppins semi-bold */
+    font-weight: 600; 
     color: var(--color-medium-grey);
 }
 
-input[type="text"],
-input[type="date"],
-input[type="number"],
-select,
-textarea {
-    width: calc(100% - 24px); /* Ajustar para relleno */
+input[type="text"], input[type="date"], input[type="number"], select, textarea {
+    width: calc(100% - 24px); 
     padding: 12px;
     border: 1px solid var(--color-border-light);
     border-radius: 6px;
     font-size: 1em;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Poppins', sans-serif; /* Aplicar nueva fuente */
+    font-family: 'Poppins', sans-serif; 
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus,
-select:focus,
-textarea:focus {
+input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
     border-color: var(--color-light-blue);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Anillo de enfoque sutil */
+    box-shadow: 0 0 0 3px rgba(var(--color-light-blue-rgb), 0.2); 
 }
 
-button {
-    background-color: var(--color-dark-blue); /* Botones azul oscuro */
+
+button#saveSprintBtn, button#saveHistoriaBtn, button#generateReportBtn, button#refreshHistoriasBtn { 
+    background-color: var(--color-dark-blue); 
     color: var(--color-white);
-    padding: 12px 25px; /* Relleno más grande */
+    padding: 12px 25px; 
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: 500; /* Poppins medium */
+    font-weight: 500; 
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    margin-right: 12px;
+    width: 100%; 
+    box-sizing: border-box; 
+    margin-top: 15px; 
 }
 
-button:hover {
-    background-color: var(--color-light-blue); /* Azul claro al pasar el ratón */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+#informe-historias-panel button#generateReportBtn {
+    margin-top: 20px; 
 }
 
-button#cancelEditBtn,
-button#cancelEditSprintBtn {
-    background-color: var(--color-medium-grey); /* Gris para botones de cancelar */
+button#cancelEditBtn, button#cancelEditSprintBtn {
+    background-color: var(--color-medium-grey); 
+    width: auto; 
+    margin-right: 12px; 
+    padding: 12px 25px;
+    margin-top: 15px; 
 }
 
-button#cancelEditBtn:hover,
-button#cancelEditSprintBtn:hover {
-    background-color: hsl(210, 10%, 40%); /* Gris más oscuro al pasar el ratón */
+button#cancelEditBtn:hover, button#cancelEditSprintBtn:hover {
+    background-color: hsl(210, 10%, 40%); 
 }
 
 hr {
@@ -252,9 +244,8 @@ hr {
     margin: 30px 0;
 }
 
-/* Tarjetas de Sprint e Historia */
 .sprint-card {
-    background-color: var(--color-off-white); /* Ligeramente blanquecino para tarjetas */
+    background-color: var(--color-off-white); 
     border: 1px solid var(--color-border-light);
     border-radius: 8px;
     padding: 20px;
@@ -274,36 +265,39 @@ hr {
 
 .sprint-actions {
     margin-top: 10px;
-    margin-bottom: 15px; /* Espacio entre acciones de sprint y lista de historias */
+    margin-bottom: 15px; 
     display: flex;
     gap: 10px;
-    justify-content: flex-end;
+    justify-content: flex-end; 
 }
 
 .sprint-actions button {
-    padding: 8px 15px; /* Relleno más grande para botones de acción de sprint */
+    padding: 8px 15px; 
     font-size: 0.9em;
-    background-color: var(--color-info); /* Usar color de información */
+    width: auto;
+    border: none;
 }
+
 .sprint-actions button.edit-sprint-btn {
     background-color: var(--color-info);
 }
+
 .sprint-actions button.edit-sprint-btn:hover {
     background-color: hsl(194, 60%, 45%);
 }
 
 .sprint-actions button.delete-sprint-btn {
-    background-color: var(--color-error); /* Usar color de error */
+    background-color: var(--color-error);
 }
+
 .sprint-actions button.delete-sprint-btn:hover {
     background-color: hsl(0, 70%, 45%);
 }
 
-
 .story-item {
     background-color: var(--color-white);
     border: 1px solid var(--color-border-light);
-    border-left: 6px solid var(--color-light-blue); /* Color de acento para el borde izquierdo de la historia */
+    border-left: 6px solid var(--color-light-blue); 
     padding: 15px;
     margin-bottom: 12px;
     border-radius: 8px;
@@ -316,7 +310,7 @@ hr {
 .story-item h4 {
     margin-top: 0;
     margin-bottom: 5px;
-    color: var(--color-dark-blue); /* Azul oscuro para el título de la historia */
+    color: var(--color-dark-blue); 
     font-size: 1.2em;
     font-weight: 600;
 }
@@ -331,17 +325,21 @@ hr {
     margin-top: 10px;
     display: flex;
     gap: 10px;
+    justify-content: flex-end; 
 }
 
 .story-item .actions button {
     padding: 8px 15px;
     font-size: 0.9em;
+    width: auto;
+    border: none; 
 }
 
 .story-item .actions button.edit-btn {
     background-color: var(--color-warning);
-    color: var(--color-dark-blue); /* Texto oscuro en el botón de advertencia */
+    color: var(--color-dark-blue); 
 }
+
 .story-item .actions button.edit-btn:hover {
     background-color: hsl(45, 90%, 55%);
 }
@@ -349,23 +347,22 @@ hr {
 .story-item .actions button.delete-btn {
     background-color: var(--color-error);
 }
+
 .story-item .actions button.delete-btn:hover {
     background-color: hsl(0, 70%, 45%);
 }
 
-/* Salida del Informe */
 #reportOutput {
     background-color: var(--color-off-white);
     border: 1px solid var(--color-border-light);
     border-radius: 8px;
     padding: 20px;
     color: var(--color-dark-blue);
-    max-height: 350px; /* Ligeramente más alto */
+    max-height: 350px; 
     overflow-y: auto;
-    font-weight: 400; /* Poppins regular */
+    font-weight: 400; 
 }
 
-/* Estilos para la tabla del informe */
 #reportOutput table {
     width: 100%;
     border-collapse: collapse;
@@ -373,8 +370,7 @@ hr {
     font-size: 0.95em;
 }
 
-#reportOutput th,
-#reportOutput td {
+#reportOutput th, #reportOutput td {
     border: 1px solid var(--color-border-light);
     padding: 12px;
     text-align: left;
@@ -382,7 +378,7 @@ hr {
 }
 
 #reportOutput th {
-    background-color: var(--color-label-bg); /* Fondo más claro para los encabezados de tabla */
+    background-color: var(--color-label-bg); 
     color: var(--color-dark-blue);
     font-weight: 600;
     text-transform: uppercase;
@@ -390,15 +386,13 @@ hr {
 }
 
 #reportOutput tr:nth-child(even) {
-    background-color: var(--color-white); /* Blanco para filas pares */
+    background-color: var(--color-white); 
 }
 
 #reportOutput tr:hover {
-    background-color: var(--color-light-bg); /* Fondo al pasar el ratón para filas */
+    background-color: var(--color-light-bg); 
 }
 
-
-/* Pie de página */
 footer {
     text-align: center;
     padding: 25px;
@@ -407,56 +401,5 @@ footer {
     color: var(--color-white);
     box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
     font-size: 0.9em;
-    font-weight: 300; /* Poppins light */
-}
-
-/* Ajustes responsivos */
-@media (max-width: 1200px) { /* Punto de quiebre ajustado para margen fijo */
-    main.container {
-        max-width: 95%; /* Permitir que ocupe más ancho en pantallas ligeramente más pequeñas */
-    }
-}
-
-@media (max-width: 1024px) {
-    .main-section {
-        grid-template-columns: auto 1fr;
-    }
-    .section-label.right {
-        display: none;
-    }
-    .section-crear-grid {
-        grid-template-columns: 1fr;
-    }
-    .panel {
-        padding: 25px; /* Reducir ligeramente el relleno */
-    }
-    h1 {
-        font-size: 2.2em;
-    }
-    h2 {
-        font-size: 1.6em;
-    }
-}
-
-@media (max-width: 768px) {
-    main.container {
-        padding: 15px;
-    }
-    .main-section {
-        grid-template-columns: 1fr;
-        padding: 15px;
-    }
-    .section-label.left {
-        display: none;
-    }
-    nav.main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-    button {
-        padding: 10px 20px;
-    }
-    input[type="text"], input[type="date"], input[type="number"], select, textarea {
-        padding: 10px;
-    }
+    font-weight: 300; 
 }
