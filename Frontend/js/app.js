@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
-    
     const sprintForm = document.getElementById('sprintForm');
     const sprintIdInput = document.getElementById('sprintId');
     const saveSprintBtn = document.getElementById('saveSprintBtn');
@@ -9,33 +8,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const sprintNombreInput = document.getElementById('sprintNombre');
     const sprintFechaInicioInput = document.getElementById('sprintFechaInicio');
     const sprintFechaFinInput = document.getElementById('sprintFechaFin');
+    const sprintPanelTitle = document.getElementById('sprintPanelTitle');
 
     const historiaForm = document.getElementById('historiaForm');
     const historiaIdInput = document.getElementById('historiaId');
     const saveHistoriaBtn = document.getElementById('saveHistoriaBtn');
     const cancelEditBtn = document.getElementById('cancelEditBtn');
-    const historiaTituloInput = document.getElementById('historiaTitulo'); 
-    const historiaDescripcionTextarea = document.getElementById('historiaDescripcion'); 
-    const historiaResponsableInput = document.getElementById('historiaResponsable'); 
-    const historiaEstadoSelect = document.getElementById('historiaEstado'); 
-    const historiaPuntosInput = document.getElementById('historiaPuntos'); 
-    const historiaFechaCreacionInput = document.getElementById('historiaFechaCreacion'); 
-    const historiaFechaFinalizacionInput = document.getElementById('historiaFechaFinalizacion'); 
+    const historiaTituloInput = document.getElementById('historiaTitulo');
+    const historiaDescripcionTextarea = document.getElementById('historiaDescripcion');
+    const historiaResponsableInput = document.getElementById('historiaResponsable');
+    const historiaEstadoSelect = document.getElementById('historiaEstado');
+    const historiaPuntosInput = document.getElementById('historiaPuntos');
+    const historiaFechaCreacionInput = document.getElementById('historiaFechaCreacion');
+    const historiaFechaFinalizacionInput = document.getElementById('historiaFechaFinalizacion');
+    const historiaFechaFinalizacionGroup = document.getElementById('historiaFechaFinalizacionGroup');
     const historiaSprintSelect = document.getElementById('historiaSprint');
+    const historiaPanelTitle = document.getElementById('historiaPanelTitle');
+
     const historiasPorSprintContainer = document.getElementById('historiasPorSprintContainer');
     const refreshHistoriasBtn = document.getElementById('refreshHistoriasBtn');
     const generateReportBtn = document.getElementById('generateReportBtn');
     const reportResponsableInput = document.getElementById('reportResponsable');
     const reportOutput = document.getElementById('reportOutput');
 
-    
     function formatDateForInput(isoDateString) {
         if (!isoDateString) return '';
         try {
-            
-            
             const date = new Date(isoDateString);
-            
             if (isNaN(date.getTime())) {
                 console.warn('Fecha inválida recibida:', isoDateString);
                 return '';
@@ -50,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
     function formatDateForDisplay(isoDateString) {
         if (!isoDateString) return 'N/A';
         try {
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
     async function makeApiRequest(url, method = 'GET', data = null) {
         const options = {
             method: method,
@@ -91,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     errorMessage += '\n' + Object.values(result.errors).flat().join('\n');
                 } else if (result.message) {
                     errorMessage += '\n' + result.message;
-                } else if (result.data) { 
+                } else if (result.data) {
                     errorMessage += '\n' + result.data;
                 }
                 alert(errorMessage);
@@ -102,21 +99,20 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error de red o parseo:', error);
             alert('Hubo un problema de conexión o con el servidor. Consulta la consola para más detalles.');
-            throw error; 
+            throw error;
         }
     }
 
-    
     async function loadSprintsIntoDropdown() {
         try {
             const result = await makeApiRequest(`${API_BASE_URL}/sprints`);
-            historiaSprintSelect.innerHTML = ''; 
+            historiaSprintSelect.innerHTML = '';
 
             if (result.data && result.data.length > 0) {
                 result.data.forEach(sprint => {
                     const option = document.createElement('option');
                     option.value = sprint.id;
-                    option.textContent = `${sprint.nombre} (${formatDateForDisplay(sprint.fecha_inicio)} - ${formatDateForDisplay(sprint.fecha_fin)})`; 
+                    option.textContent = `${sprint.nombre} (${formatDateForDisplay(sprint.fecha_inicio)} - ${formatDateForDisplay(sprint.fecha_fin)})`;
                     historiaSprintSelect.appendChild(option);
                 });
             } else {
@@ -128,11 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 historiaSprintSelect.appendChild(option);
             }
         } catch (error) {
-            
         }
     }
 
-    
     sprintForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = sprintIdInput.value;
@@ -146,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let url = `${API_BASE_URL}/sprints`;
         let successMessage = 'Sprint creado exitosamente.';
 
-        if (id) { 
+        if (id) {
             method = 'PUT';
             url = `${API_BASE_URL}/sprints/${id}`;
             successMessage = 'Sprint actualizado exitosamente.';
@@ -156,16 +150,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await makeApiRequest(url, method, data);
             alert(result.message);
             sprintForm.reset();
-            sprintIdInput.value = ''; 
-            saveSprintBtn.textContent = 'Crear Sprint'; 
-            cancelEditSprintBtn.style.display = 'none'; 
-            loadSprintsIntoDropdown(); 
-            loadHistoriasPorSprint(); 
+            sprintIdInput.value = '';
+            saveSprintBtn.textContent = 'Crear Sprint';
+            cancelEditSprintBtn.style.display = 'none';
+            sprintPanelTitle.textContent = 'Crear Nuevo Sprint';
+            loadSprintsIntoDropdown();
+            loadHistoriasPorSprint();
         } catch (error) {
-            
         }
     });
-    
+
     async function editSprint(id) {
         try {
             const result = await makeApiRequest(`${API_BASE_URL}/sprints/${id}`);
@@ -173,50 +167,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             sprintIdInput.value = sprint.id;
             sprintNombreInput.value = sprint.nombre;
-            sprintFechaInicioInput.value = formatDateForInput(sprint.fecha_inicio); 
-            sprintFechaFinInput.value = formatDateForInput(sprint.fecha_fin); 
+            sprintFechaInicioInput.value = formatDateForInput(sprint.fecha_inicio);
+            sprintFechaFinInput.value = formatDateForInput(sprint.fecha_fin);
 
             saveSprintBtn.textContent = 'Actualizar Sprint';
             cancelEditSprintBtn.style.display = 'inline-block';
-            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            sprintPanelTitle.textContent = 'Actualizar Sprint';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
-            
         }
     }
 
-    
     async function deleteSprint(id) {
         if (confirm('¿Estás seguro de que quieres eliminar este sprint y todas sus historias asociadas?')) {
             try {
                 const result = await makeApiRequest(`${API_BASE_URL}/sprints/${id}`, 'DELETE');
                 alert(result.data || 'Sprint eliminado exitosamente.');
-                loadSprintsIntoDropdown(); 
-                loadHistoriasPorSprint(); 
+                loadSprintsIntoDropdown();
+                loadHistoriasPorSprint();
             } catch (error) {
-                
             }
         }
     }
 
-    
     cancelEditSprintBtn.addEventListener('click', () => {
         sprintForm.reset();
         sprintIdInput.value = '';
         saveSprintBtn.textContent = 'Crear Sprint';
         cancelEditSprintBtn.style.display = 'none';
+        sprintPanelTitle.textContent = 'Crear Nuevo Sprint';
     });
 
-    
     async function loadHistoriasPorSprint() {
         try {
             const result = await makeApiRequest(`${API_BASE_URL}/sprints/historias`);
-            historiasPorSprintContainer.innerHTML = ''; 
+            historiasPorSprintContainer.innerHTML = '';
 
             if (result.data && result.data.length > 0) {
                 result.data.forEach(sprint => {
                     const sprintCard = document.createElement('div');
                     sprintCard.className = 'sprint-card';
-                    sprintCard.dataset.id = sprint.id; 
+                    sprintCard.dataset.id = sprint.id;
 
                     sprintCard.innerHTML = `
                         <h3>${sprint.nombre} (${formatDateForDisplay(sprint.fecha_inicio)} - ${formatDateForDisplay(sprint.fecha_fin)})</h3>
@@ -255,11 +246,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 historiasPorSprintContainer.innerHTML = '<p>No hay sprints o historias disponibles.</p>';
             }
         } catch (error) {
-            
         }
     }
 
-    
+    function toggleFechaFinalizacionField() {
+        if (historiaEstadoSelect.value === 'finalizada') {
+            historiaFechaFinalizacionGroup.style.display = 'block';
+            historiaFechaFinalizacionInput.setAttribute('required', 'required');
+        } else {
+            historiaFechaFinalizacionGroup.style.display = 'none';
+            historiaFechaFinalizacionInput.removeAttribute('required');
+            historiaFechaFinalizacionInput.value = '';
+        }
+    }
+
+    historiaEstadoSelect.addEventListener('change', toggleFechaFinalizacionField);
+
     historiaForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -270,8 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const estado = historiaEstadoSelect.value;
         const puntos = historiaPuntosInput.value;
         const fecha_creacion = historiaFechaCreacionInput.value;
-        const fecha_finalizacion = historiaFechaFinalizacionInput.value; 
+        let fecha_finalizacion = historiaFechaFinalizacionInput.value;
         const sprint_id = historiaSprintSelect.value;
+
+        if (estado === 'finalizada' && !fecha_finalizacion) {
+            fecha_finalizacion = new Date().toISOString().slice(0, 10);
+        } else if (estado !== 'finalizada') {
+            fecha_finalizacion = null;
+        }
 
         const data = {
             titulo,
@@ -280,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
             estado,
             puntos: parseInt(puntos),
             fecha_creacion,
-            fecha_finalizacion: fecha_finalizacion || null, 
+            fecha_finalizacion,
             sprint_id: parseInt(sprint_id)
         };
 
@@ -288,36 +296,26 @@ document.addEventListener('DOMContentLoaded', () => {
         let url = `${API_BASE_URL}/historias`;
         let successMessage = 'Historia creada exitosamente.';
 
-        if (id) { 
+        if (id) {
             method = 'PUT';
             url = `${API_BASE_URL}/historias/${id}`;
             successMessage = 'Historia actualizada exitosamente.';
-
-            
-            
-            
-            if (estado === 'finalizada' && !data.fecha_finalizacion) {
-                data.fecha_finalizacion = new Date().toISOString().slice(0, 10);
-            } else if (estado !== 'finalizada') {
-                data.fecha_finalizacion = null;
-            }
-            
         }
 
         try {
             const result = await makeApiRequest(url, method, data);
             alert(result.message);
             historiaForm.reset();
-            historiaIdInput.value = ''; 
-            saveHistoriaBtn.textContent = 'Guardar Historia'; 
-            cancelEditBtn.style.display = 'none'; 
-            loadHistoriasPorSprint(); 
+            historiaIdInput.value = '';
+            saveHistoriaBtn.textContent = 'Guardar Historia';
+            cancelEditBtn.style.display = 'none';
+            historiaPanelTitle.textContent = 'Crear Nueva Historia de Usuario';
+            toggleFechaFinalizacionField();
+            loadHistoriasPorSprint();
         } catch (error) {
-            
         }
     });
 
-    
     async function editHistoria(id) {
         try {
             const result = await makeApiRequest(`${API_BASE_URL}/historias/${id}`);
@@ -329,35 +327,33 @@ document.addEventListener('DOMContentLoaded', () => {
             historiaResponsableInput.value = historia.responsable;
             historiaEstadoSelect.value = historia.estado;
             historiaPuntosInput.value = historia.puntos;
-            historiaFechaCreacionInput.value = formatDateForInput(historia.fecha_creacion); 
-            historiaFechaFinalizacionInput.value = formatDateForInput(historia.fecha_finalizacion); 
+            historiaFechaCreacionInput.value = formatDateForInput(historia.fecha_creacion);
+            historiaFechaFinalizacionInput.value = formatDateForInput(historia.fecha_finalizacion);
 
-            historiaSprintSelect.value = historia.sprint_id; 
+            historiaSprintSelect.value = historia.sprint_id;
+
+            toggleFechaFinalizacionField();
 
             saveHistoriaBtn.textContent = 'Actualizar Historia';
             cancelEditBtn.style.display = 'inline-block';
-            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            historiaPanelTitle.textContent = 'Actualizar Historia de Usuario';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
-            
         }
     }
 
-    
     async function deleteHistoria(id) {
         if (confirm('¿Estás seguro de que quieres eliminar esta historia de usuario?')) {
             try {
                 const result = await makeApiRequest(`${API_BASE_URL}/historias/${id}`, 'DELETE');
                 alert(result.data || 'Historia eliminada exitosamente.');
-                loadHistoriasPorSprint(); 
+                loadHistoriasPorSprint();
             } catch (error) {
-                
             }
         }
     }
 
-    
     historiasPorSprintContainer.addEventListener('click', (e) => {
-        
         if (e.target.classList.contains('edit-btn')) {
             const id = e.target.dataset.id;
             editHistoria(id);
@@ -365,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = e.target.dataset.id;
             deleteHistoria(id);
         }
-        
         else if (e.target.classList.contains('edit-sprint-btn')) {
             const id = e.target.dataset.id;
             editSprint(id);
@@ -375,19 +370,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    
     cancelEditBtn.addEventListener('click', () => {
         historiaForm.reset();
         historiaIdInput.value = '';
         saveHistoriaBtn.textContent = 'Guardar Historia';
         cancelEditBtn.style.display = 'none';
-        
-        historiaFechaFinalizacionInput.value = '';
+        historiaPanelTitle.textContent = 'Crear Nueva Historia de Usuario';
+        toggleFechaFinalizacionField();
     });
 
-    
     refreshHistoriasBtn.addEventListener('click', loadHistoriasPorSprint);
-    
 
     generateReportBtn.addEventListener('click', async () => {
         const responsable = reportResponsableInput.value.trim();
@@ -401,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let reportHTML = '<table>';
             reportHTML += '<thead><tr><th>Métrica</th><th>Valor</th></tr></thead><tbody>';
-            reportHTML += `<tr><td>Responsable</td><td>${result.responsable || 'Todos'}</td></tr>`; 
+            reportHTML += `<tr><td>Responsable</td><td>${result.responsable || 'Todos'}</td></tr>`;
             reportHTML += `<tr><td>Total de Historias</td><td>${result.total_historias}</td></tr>`;
             reportHTML += `<tr><td>Historias Finalizadas</td><td>${result.finalizadas}</td></tr>`;
             reportHTML += `<tr><td>Historias Pendientes</td><td>${result.pendientes}</td></tr>`;
@@ -415,10 +407,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    
     async function initializeApp() {
-        await loadSprintsIntoDropdown(); 
-        loadHistoriasPorSprint(); 
+        await loadSprintsIntoDropdown();
+        loadHistoriasPorSprint();
+        toggleFechaFinalizacionField();
     }
 
     initializeApp();

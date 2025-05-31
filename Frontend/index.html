@@ -23,10 +23,12 @@
         <section class="main-section" id="section-crear">
             <div class="section-label left">Crear</div>
             <div class="section-content section-crear-grid">
+
                 <div class="panel" id="crear-sprint-panel">
-                    <h2>Crear Nuevo Sprint</h2>
+                    <h2 id="sprintPanelTitle">Crear Sprint</h2>
                     <form id="sprintForm">
-                        <input type="hidden" id="sprintId"> <div class="form-group">
+                        <input type="hidden" id="sprintId">
+                        <div class="form-group">
                             <label for="sprintNombre">Nombre:</label>
                             <input type="text" id="sprintNombre" required>
                         </div>
@@ -44,7 +46,7 @@
                 </div>
 
                 <div class="panel" id="crear-historia-panel">
-                    <h2>Crear/Editar Historia de Usuario</h2>
+                    <h2 id="historiaPanelTitle">Crear Nueva Historia de Usuario</h2>
                     <form id="historiaForm">
                         <input type="hidden" id="historiaId">
                         <div class="form-group">
@@ -53,7 +55,7 @@
                         </div>
                         <div class="form-group">
                             <label for="historiaDescripcion">Descripción:</label>
-                            <textarea id="historiaDescripcion" rows="3" required></textarea>
+                            <textarea id="historiaDescripcion" rows="4" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="historiaResponsable">Responsable:</label>
@@ -65,25 +67,25 @@
                                 <option value="nueva">Nueva</option>
                                 <option value="activa">Activa</option>
                                 <option value="finalizada">Finalizada</option>
-                                <option value="impedimento">En Impedimento</option>
+                                <option value="impedimento">Impedimento</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="historiaPuntos">Puntos de Complejidad:</label>
+                            <label for="historiaPuntos">Puntos:</label>
                             <input type="number" id="historiaPuntos" min="1" required>
                         </div>
                         <div class="form-group">
                             <label for="historiaFechaCreacion">Fecha de Creación:</label>
                             <input type="date" id="historiaFechaCreacion" required>
                         </div>
-                        <div class="form-group">
-                            <label for="historiaFechaFinalizacion">Fecha de Finalización (opcional):</label>
+                        <div class="form-group" id="historiaFechaFinalizacionGroup" style="display: none;">
+                            <label for="historiaFechaFinalizacion">Fecha de Finalización:</label>
                             <input type="date" id="historiaFechaFinalizacion">
                         </div>
                         <div class="form-group">
                             <label for="historiaSprint">Asignar a Sprint:</label>
                             <select id="historiaSprint" required>
-                                </select>
+                            </select>
                         </div>
                         <button type="submit" id="saveHistoriaBtn">Guardar Historia</button>
                         <button type="button" id="cancelEditBtn" style="display: none;">Cancelar Edición</button>
@@ -99,7 +101,7 @@
                 <div class="panel" id="historias-por-sprint-panel">
                     <h2>Historias por Sprint</h2>
                     <div id="historiasPorSprintContainer">
-                        </div>
+                    </div>
                     <button id="refreshHistoriasBtn">Actualizar Historias</button>
                 </div>
             </div>
@@ -117,7 +119,7 @@
                         <button id="generateReportBtn">Generar Informe</button>
                     </div>
                     <div id="reportOutput">
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="section-label right">Informe</div>
@@ -125,7 +127,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Gestor de Historias</p>
+        <p>Llegaste hasta aquí, eso significa que sacamos 5</p>
     </footer>
 
     <script src="js/app.js"></script>
