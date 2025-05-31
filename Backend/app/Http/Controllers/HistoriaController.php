@@ -93,23 +93,29 @@ class HistoriaController extends Controller
     {
         $responsable = $request->query('responsable');
 
-        $query = Historia::query();
+        $totalHistoriasQuery = Historia::query();
+        $finalizadasQuery = Historia::query();
+        $pendientesQuery = Historia::query();
+        $impedimentosQuery = Historia::query();
 
         if ($responsable) {
-            $query->where('responsable', $responsable);
+            $totalHistoriasQuery->where('responsable', $responsable);
+            $finalizadasQuery->where('responsable', $responsable);
+            $pendientesQuery->where('responsable', $responsable);
+            $impedimentosQuery->where('responsable', $responsable);
         }
 
-        $totalHistorias = $query->count();
-        $finalizadas = $query->where('estado', 'finalizada')->count();
-        $pendientes = $query->where('estado', 'nueva')->orWhere('estado', 'activa')->count();
-        $impedimentos = $query->where('estado', 'impedimento')->count();
+        $totalHistorias = $totalHistoriasQuery->count();
+        $finalizadas = $finalizadasQuery->where('estado', 'finalizada')->count();
+        $pendientes = $pendientesQuery->where('estado', 'activa')->count();
+        $impedimentos = $impedimentosQuery->where('estado', 'impedimento')->count();
 
         return response()->json([
+            'responsable' => $responsable,
             'total_historias' => $totalHistorias,
             'finalizadas' => $finalizadas,
             'pendientes' => $pendientes,
             'impedimentos' => $impedimentos,
-            'responsable' => $responsable ?? 'General',
-        ], 200);
+        ], 200);;
     }
 }
