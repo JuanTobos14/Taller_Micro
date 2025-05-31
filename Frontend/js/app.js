@@ -14,22 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const historiaIdInput = document.getElementById('historiaId');
     const saveHistoriaBtn = document.getElementById('saveHistoriaBtn');
     const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const historiaSprintSelect = document.getElementById('historiaSprint');
     const historiaTituloInput = document.getElementById('historiaTitulo');
+    const reportOutput = document.getElementById('reportOutput');
     const historiaDescripcionTextarea = document.getElementById('historiaDescripcion');
+    const historiaPanelTitle = document.getElementById('historiaPanelTitle');
     const historiaResponsableInput = document.getElementById('historiaResponsable');
     const historiaEstadoSelect = document.getElementById('historiaEstado');
     const historiaPuntosInput = document.getElementById('historiaPuntos');
     const historiaFechaCreacionInput = document.getElementById('historiaFechaCreacion');
     const historiaFechaFinalizacionInput = document.getElementById('historiaFechaFinalizacion');
     const historiaFechaFinalizacionGroup = document.getElementById('historiaFechaFinalizacionGroup');
-    const historiaSprintSelect = document.getElementById('historiaSprint');
-    const historiaPanelTitle = document.getElementById('historiaPanelTitle');
 
     const historiasPorSprintContainer = document.getElementById('historiasPorSprintContainer');
     const refreshHistoriasBtn = document.getElementById('refreshHistoriasBtn');
     const generateReportBtn = document.getElementById('generateReportBtn');
     const reportResponsableInput = document.getElementById('reportResponsable');
-    const reportOutput = document.getElementById('reportOutput');
 
     function formatDateForInput(isoDateString) {
         if (!isoDateString) return '';
